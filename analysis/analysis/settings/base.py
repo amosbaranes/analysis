@@ -1,6 +1,9 @@
 import os  # isort:skip
 gettext = lambda s: s
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
+# print(DATA_DIR)
+EXCEL_DIR = os.path.dirname(os.path.dirname(DATA_DIR))+'/excel/'
+# print(EXCEL_DIR)
 """
 Django settings for analysis project.
 
@@ -26,28 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'kea)izmd+a))@x9b&nmk_1g38z#b$(6-p*_$s(+@4^mj7ov35*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
-
-
 
 
 ROOT_URLCONF = 'analysis.urls'
 
-
-
 WSGI_APPLICATION = 'analysis.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-
 
 
 # Password validation
@@ -89,18 +78,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
-STATIC_ROOT = os.path.join(DATA_DIR, 'static')
+STATIC_ROOT = os.path.join(DATA_DIR, '../static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'analysis', 'static'),
+    os.path.join(BASE_DIR, 'analysis', '../static'),
 )
-SITE_ID = 1
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'analysis', 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'analysis', '../templates'), ],
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
@@ -178,7 +166,9 @@ INSTALLED_APPS = [
     'djangocms_style',
     'djangocms_googlemap',
     'djangocms_video',
-    'analysis'
+    'analysis',
+    'analysis.apps.core',
+    'analysis.apps.finance'
 ]
 
 LANGUAGES = (
@@ -217,17 +207,6 @@ CMS_PERMISSION = True
 
 CMS_PLACEHOLDER_CONF = {}
 
-DATABASES = {
-    'default': {
-        'CONN_MAX_AGE': 0,
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'localhost',
-        'NAME': 'analysis',
-        'PASSWORD': 'analysis',
-        'PORT': '',
-        'USER': 'analysis'
-    }
-}
 
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
